@@ -429,8 +429,8 @@ const translations: Record<Language, I18nText> = {
     deployKeyDesc: "客户端调用 API 时需要的密钥。",
     deployKeyDefault: "默认值：",
     deployKeySuggestion: "建议设置为复杂的随机字符串，例如：",
-    deployModelNameVar: "模型显示名称（默认：Dolphin 24B）",
-    deployModelNameDesc: "模型显示名称（默认：Dolphin 24B）",
+    deployModelNameVar: "模型显示名称（默认：Dolphin 24B (slow)）",
+    deployModelNameDesc: "模型显示名称（默认：Dolphin 24B (slow)）",
     deployTemplateDesc: "默认模板（默认：logical）",
     deployDebugDesc: "调试模式（默认：false，生产环境建议关闭）",
     deployStreamDesc: "默认流式响应（默认：true）",
@@ -642,8 +642,8 @@ const translations: Record<Language, I18nText> = {
     deployKeyDesc: "API key required when clients call the API.",
     deployKeyDefault: "Default:",
     deployKeySuggestion: "Recommended to set a complex random string, e.g.:",
-    deployModelNameVar: "Model display name (default: Dolphin 24B)",
-    deployModelNameDesc: "Model display name (default: Dolphin 24B)",
+    deployModelNameVar: "Model display name (default: Dolphin 24B (slow))",
+    deployModelNameDesc: "Model display name (default: Dolphin 24B (slow))",
     deployTemplateDesc: "Default template (default: logical)",
     deployDebugDesc: "Debug mode (default: false, recommended to disable in production)",
     deployStreamDesc: "Default streaming response (default: true)",
@@ -855,8 +855,8 @@ const translations: Record<Language, I18nText> = {
     deployKeyDesc: "クライアントがAPIを呼び出す際に必要なキー。",
     deployKeyDefault: "デフォルト：",
     deployKeySuggestion: "複雑なランダム文字列に設定することを推奨、例：",
-    deployModelNameVar: "モデル表示名（デフォルト：Dolphin 24B）",
-    deployModelNameDesc: "モデル表示名（デフォルト：Dolphin 24B）",
+    deployModelNameVar: "モデル表示名（デフォルト：Dolphin 24B (slow)）",
+    deployModelNameDesc: "モデル表示名（デフォルト：Dolphin 24B (slow)）",
     deployTemplateDesc: "デフォルトテンプレート（デフォルト：logical）",
     deployDebugDesc: "デバッグモード（デフォルト：false、本番環境では無効化推奨）",
     deployStreamDesc: "デフォルトストリーミングレスポンス（デフォルト：true）",
@@ -1221,7 +1221,7 @@ function getDeployPage(lang: Language, t: I18nText, currentUrl: string): string 
     .replace('🔒 建议设置为复杂的随机字符串，例如：', `🔒 ${t.deployKeySuggestion}`)
     // Other variables
     .replace('<h3 class="font-bold text-gray-900 mb-3">其他可选变量</h3>', `<h3 class="font-bold text-gray-900 mb-3">${t.deployOtherVars}</h3>`)
-    .replace('- 模型显示名称（默认：Dolphin 24B）', `- ${t.deployModelNameDesc}`)
+    .replace('- 模型显示名称（默认：Dolphin 24B (slow)）', `- ${t.deployModelNameDesc}`)
     .replace('<span class="text-gray-600 ml-2">- 默认模板（默认：logical）</span>', `<span class="text-gray-600 ml-2">- ${t.deployTemplateDesc}</span>`)
     .replace('<span class="text-gray-600 ml-2">- 调试模式（默认：false，生产环境建议关闭）</span>', `<span class="text-gray-600 ml-2">- ${t.deployDebugDesc}</span>`)
     .replace('<span class="text-gray-600 ml-2">- 默认流式响应（默认：true）</span>', `<span class="text-gray-600 ml-2">- ${t.deployStreamDesc}</span>`)
@@ -1336,7 +1336,7 @@ function getDashboardPage(lang: Language, t: I18nText, currentUrl: string): stri
 
 const UPSTREAM_URL = Deno.env.get("DPHN_UPSTREAM_URL") || "https://chat.dphn.ai/api/chat";
 const DEFAULT_KEY = Deno.env.get("DPHN_DEFAULT_KEY") || "sk-dphn-key";
-const MODEL_NAME = Deno.env.get("DPHN_MODEL_NAME") || "Dolphin 24B";
+const MODEL_NAME = Deno.env.get("DPHN_MODEL_NAME") || "Dolphin 24B (slow)";
 const PORT = parseInt(Deno.env.get("DPHN_PORT") || "9091");
 const DEBUG_MODE = Deno.env.get("DPHN_DEBUG_MODE") === "true";
 const DEFAULT_STREAM = Deno.env.get("DPHN_DEFAULT_STREAM") !== "false";
@@ -1521,7 +1521,7 @@ function mapModelName(openAIModel: string): { modelId: string; template: string;
   if (!isDolphinModel) {
     return {
       ...defaultResult,
-      error: `不支持的模型 "${openAIModel}"。支持的模型格式：Dolphin 24B 或 Dolphin 24B-{template}`
+      error: `不支持的模型 "${openAIModel}"。支持的模型格式：Dolphin 24B (slow) 或 Dolphin 24B (slow)-{template}`
     };
   }
 
@@ -3044,11 +3044,11 @@ const playgroundHTML = `<!DOCTYPE html>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">模型</label>
                     <select id="model" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                        <option value="Dolphin 24B">Dolphin 24B (默认)</option>
-                        <option value="Dolphin 24B-logical">Dolphin 24B-logical</option>
-                        <option value="Dolphin 24B-summary">Dolphin 24B-summary</option>
-                        <option value="Dolphin 24B-code-beginner">Dolphin 24B-code-beginner</option>
-                        <option value="Dolphin 24B-code-advanced">Dolphin 24B-code-advanced</option>
+                        <option value="Dolphin 24B (slow)">Dolphin 24B (slow) (默认)</option>
+                        <option value="Dolphin 24B (slow)-logical">Dolphin 24B (slow)-logical</option>
+                        <option value="Dolphin 24B (slow)-summary">Dolphin 24B (slow)-summary</option>
+                        <option value="Dolphin 24B (slow)-code-beginner">Dolphin 24B (slow)-code-beginner</option>
+                        <option value="Dolphin 24B (slow)-code-advanced">Dolphin 24B (slow)-code-advanced</option>
                     </select>
                 </div>
 
@@ -3202,22 +3202,22 @@ const playgroundHTML = `<!DOCTYPE html>
     <script>
         const examples = {
             simple: {
-                model: 'Dolphin 24B',
+                model: 'Dolphin 24B (slow)',
                 system: '',
                 message: '你好,请介绍一下你自己'
             },
             multi: {
-                model: 'Dolphin 24B-logical',
+                model: 'Dolphin 24B (slow)-logical',
                 system: '你是一个专业的教育助手，擅长用简单的语言解释复杂概念。',
                 message: '什么是机器学习？'
             },
             summary: {
-                model: 'Dolphin 24B-summary',
+                model: 'Dolphin 24B (slow)-summary',
                 system: '',
                 message: '请总结以下内容：人工智能（AI）是计算机科学的一个分支，致力于创建能够执行通常需要人类智能的任务的系统。这包括学习、推理、问题解决、感知和语言理解等能力。'
             },
             code: {
-                model: 'Dolphin 24B-code-advanced',
+                model: 'Dolphin 24B (slow)-code-advanced',
                 system: '你是一个专业的编程助手，提供清晰、高效的代码示例。',
                 message: '用 Python 写一个快速排序算法，并添加详细注释'
             }
@@ -3593,7 +3593,7 @@ const deployHTML = `<!DOCTYPE html>
                     <div class="space-y-2 text-sm">
                         <div class="bg-white rounded p-2">
                             <code class="text-blue-600 font-mono">DPHN_MODEL_NAME</code>
-                            <span class="text-gray-600 ml-2">- 模型显示名称（默认：Dolphin 24B）</span>
+                            <span class="text-gray-600 ml-2">- 模型显示名称（默认：Dolphin 24B (slow)）</span>
                         </div>
                         <div class="bg-white rounded p-2">
                             <code class="text-blue-600 font-mono">DPHN_DEFAULT_TEMPLATE</code>
