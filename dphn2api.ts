@@ -1510,7 +1510,7 @@ function mapModelName(openAIModel: string): { modelId: string; template: string;
 
   // 默认结果
   const defaultResult = {
-    modelId: "dolphinpod:24B",
+    modelId: "dolphinpod:Dolphin-Mistral-24B-Venice-Edition-6Bpw",
     template: DEFAULT_TEMPLATE
   };
 
@@ -1530,7 +1530,7 @@ function mapModelName(openAIModel: string): { modelId: string; template: string;
     if (openAIModel.endsWith(`-${template}`)) {
       debugLog(`从模型名称提取 template: ${template}`);
       return {
-        modelId: "dolphinpod:24B",
+        modelId: "dolphinpod:Dolphin-Mistral-24B-Venice-Edition-6Bpw",
         template: template,
       };
     }
