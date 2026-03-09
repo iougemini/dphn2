@@ -899,7 +899,7 @@ function detectLanguage(acceptLanguage: string): Language {
 const SEO_CONFIG = {
   title: "Dphn2Api - Dolphin AI OpenAI兼容API代理",
   description: "Dolphin AI 的 OpenAI 兼容 API 代理服务，支持多种模型和流式响应",
-  keywords: "Dolphin AI,OpenAI,API,Proxy,AI,GPT,Deno,TypeScript,24B,Logical,Summary,Creative,Code",
+  keywords: "Dolphin AI,OpenAI,API,Proxy,AI,GPT,Deno,TypeScript,24B,Logical,Summary,Code",
   author: "Dphn2Api",
   ogImage: "",
 };
@@ -1096,7 +1096,6 @@ function getDocsPage(lang: Language, t: I18nText, currentUrl: string): string {
     .replace('<p class="text-gray-700 mb-3">Dolphin AI 支持以下模板类型（通过环境变量 DPHN_DEFAULT_TEMPLATE 配置）：</p>', `<p class="text-gray-700 mb-3">${t.docsTemplateDesc}</p>`)
     .replace('<p class="text-xs text-gray-600 mt-1">逻辑推理（默认）</p>', `<p class="text-xs text-gray-600 mt-1">${t.docsTemplateLogicalDesc}</p>`)
     .replace('<p class="text-xs text-gray-600 mt-1">内容总结</p>', `<p class="text-xs text-gray-600 mt-1">${t.docsTemplateSummaryDesc}</p>`)
-    .replace('<p class="text-xs text-gray-600 mt-1">创意迸发</p>', `<p class="text-xs text-gray-600 mt-1">${t.docsTemplateCreativeDesc}</p>`)
     .replace('<p class="text-xs text-gray-600 mt-1">代码入门</p>', `<p class="text-xs text-gray-600 mt-1">${t.docsTemplateCodeBeginnerDesc}</p>`)
     .replace('<p class="text-xs text-gray-600 mt-1">高级编程</p>', `<p class="text-xs text-gray-600 mt-1">${t.docsTemplateCodeAdvancedDesc}</p>`)
     // Integration examples
@@ -1507,7 +1506,7 @@ function generateBrowserHeaders() {
 // 验证并映射模型名称
 function mapModelName(openAIModel: string): { modelId: string; template: string; error?: string } {
   // 支持的 template 列表（顺序很重要：长的放前面，避免误匹配）
-  const validTemplates = ["code-beginner", "code-advanced", "logical", "summary","creative"];
+  const validTemplates = ["code-beginner", "code-advanced", "logical", "summary"];
 
   // 默认结果
   const defaultResult = {
@@ -1652,7 +1651,7 @@ async function handleModels(req: Request): Promise<Response> {
     debugLog("Models response:", data);
 
     // Available templates from Dolphin API
-    const templates = ["logical", "summary", "creative","code-beginner", "code-advanced"];
+    const templates = ["logical", "summary", "code-beginner", "code-advanced"];
 
     // Transform to OpenAI format - create model variants for each template
     const modelVariants: any[] = [];
@@ -2128,7 +2127,7 @@ const homeHTML = `<!DOCTYPE html>
                         <span class="text-green-400 text-xl">✓</span>
                         <div>
                             <p class="text-white font-semibold">多模板支持</p>
-                            <p class="text-blue-200/70 text-xs">logical / summary / creative/ code</p>
+                            <p class="text-blue-200/70 text-xs">logical / summary / code</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-3">
@@ -2348,10 +2347,6 @@ const apiDocsHTML = `<!DOCTYPE html>
                     <div class="bg-blue-50 border border-blue-200 rounded p-3">
                         <code class="text-blue-700 font-mono text-sm">summary</code>
                         <p class="text-xs text-gray-600 mt-1">内容总结</p>
-                    </div>
-                    <div class="bg-blue-50 border border-blue-200 rounded p-3">
-                        <code class="text-blue-700 font-mono text-sm">creative</code>
-                        <p class="text-xs text-gray-600 mt-1">创意迸发</p>
                     </div>
                     <div class="bg-blue-50 border border-blue-200 rounded p-3">
                         <code class="text-blue-700 font-mono text-sm">code-beginner</code>
@@ -3049,12 +3044,11 @@ const playgroundHTML = `<!DOCTYPE html>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">模型</label>
                     <select id="model" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                        <option value="dp3:flash">dp3:flash (默认)</option>
-                        <option value="dp3:flash-logical">dp3:flash-logical</option>
-                        <option value="dp3:flash-summary">dp3:flash-summary</option>
-                        <option value="dp3:flash-summary">dp3:flash-creative</option>
-                        <option value="dp3:flash-code-beginner">dp3:flash-code-beginner</option>
-                        <option value="dp3:flash-code-advanced">dp3:flash-code-advanced</option>
+                        <option value="GLM-4.7-Flash-Beta">GLM-4.7-Flash-Beta (默认)</option>
+                        <option value="GLM-4.7-Flash-Beta-logical">GLM-4.7-Flash-Beta-logical</option>
+                        <option value="GLM-4.7-Flash-Beta-summary">GLM-4.7-Flash-Beta-summary</option>
+                        <option value="GLM-4.7-Flash-Beta-code-beginner">GLM-4.7-Flash-Beta-code-beginner</option>
+                        <option value="GLM-4.7-Flash-Beta-code-advanced">GLM-4.7-Flash-Beta-code-advanced</option>
                     </select>
                 </div>
 
@@ -3208,22 +3202,22 @@ const playgroundHTML = `<!DOCTYPE html>
     <script>
         const examples = {
             simple: {
-                model: 'dp3:flash',
+                model: 'GLM-4.7-Flash-Beta',
                 system: '',
                 message: '你好,请介绍一下你自己'
             },
             multi: {
-                model: 'dp3:flash-logical',
+                model: 'GLM-4.7-Flash-Beta-logical',
                 system: '你是一个专业的教育助手，擅长用简单的语言解释复杂概念。',
                 message: '什么是机器学习？'
             },
             summary: {
-                model: 'dp3:flash-summary',
+                model: 'GLM-4.7-Flash-Beta-summary',
                 system: '',
                 message: '请总结以下内容：人工智能（AI）是计算机科学的一个分支，致力于创建能够执行通常需要人类智能的任务的系统。这包括学习、推理、问题解决、感知和语言理解等能力。'
             },
             code: {
-                model: 'dp3:flash-code-advanced',
+                model: 'GLM-4.7-Flash-Beta-code-advanced',
                 system: '你是一个专业的编程助手，提供清晰、高效的代码示例。',
                 message: '用 Python 写一个快速排序算法，并添加详细注释'
             }
