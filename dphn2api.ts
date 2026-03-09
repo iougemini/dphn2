@@ -1,4 +1,4 @@
-// Deno OpenAI-Compatible API Proxy for Dolphin AI 
+// Deno OpenAI-Compatible API Proxy for Dolphin AI
 
 export {};
 
@@ -1521,7 +1521,7 @@ function mapModelName(openAIModel: string): { modelId: string; template: string;
   if (!isDolphinModel) {
     return {
       ...defaultResult,
-      error: `不支持的模型 "${openAIModel}"。支持的模型格式：GLM-4.7-Flash-Beta 或 GLM-4.7-Flash-Beta-{template}`
+      error: `不支持的模型 "${openAIModel}"。支持的模型格式：Dolphin 24B 或 Dolphin 24B-{template}`
     };
   }
 
@@ -3044,11 +3044,11 @@ const playgroundHTML = `<!DOCTYPE html>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">模型</label>
                     <select id="model" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                        <option value="GLM-4.7-Flash-Beta">GLM-4.7-Flash-Beta (默认)</option>
-                        <option value="GLM-4.7-Flash-Beta-logical">GLM-4.7-Flash-Beta-logical</option>
-                        <option value="GLM-4.7-Flash-Beta-summary">GLM-4.7-Flash-Beta-summary</option>
-                        <option value="GLM-4.7-Flash-Beta-code-beginner">GLM-4.7-Flash-Beta-code-beginner</option>
-                        <option value="GLM-4.7-Flash-Beta-code-advanced">GLM-4.7-Flash-Beta-code-advanced</option>
+                        <option value="Dolphin 24B">Dolphin 24B (默认)</option>
+                        <option value="Dolphin 24B-logical">Dolphin 24B-logical</option>
+                        <option value="Dolphin 24B-summary">Dolphin 24B-summary</option>
+                        <option value="Dolphin 24B-code-beginner">Dolphin 24B-code-beginner</option>
+                        <option value="Dolphin 24B-code-advanced">Dolphin 24B-code-advanced</option>
                     </select>
                 </div>
 
@@ -3202,22 +3202,22 @@ const playgroundHTML = `<!DOCTYPE html>
     <script>
         const examples = {
             simple: {
-                model: 'GLM-4.7-Flash-Beta',
+                model: 'Dolphin 24B',
                 system: '',
                 message: '你好,请介绍一下你自己'
             },
             multi: {
-                model: 'GLM-4.7-Flash-Beta-logical',
+                model: 'Dolphin 24B-logical',
                 system: '你是一个专业的教育助手，擅长用简单的语言解释复杂概念。',
                 message: '什么是机器学习？'
             },
             summary: {
-                model: 'GLM-4.7-Flash-Beta-summary',
+                model: 'Dolphin 24B-summary',
                 system: '',
                 message: '请总结以下内容：人工智能（AI）是计算机科学的一个分支，致力于创建能够执行通常需要人类智能的任务的系统。这包括学习、推理、问题解决、感知和语言理解等能力。'
             },
             code: {
-                model: 'GLM-4.7-Flash-Beta-code-advanced',
+                model: 'Dolphin 24B-code-advanced',
                 system: '你是一个专业的编程助手，提供清晰、高效的代码示例。',
                 message: '用 Python 写一个快速排序算法，并添加详细注释'
             }
@@ -3593,7 +3593,7 @@ const deployHTML = `<!DOCTYPE html>
                     <div class="space-y-2 text-sm">
                         <div class="bg-white rounded p-2">
                             <code class="text-blue-600 font-mono">DPHN_MODEL_NAME</code>
-                            <span class="text-gray-600 ml-2">- 模型显示名称（默认：GLM-4.7-Flash-Beta）</span>
+                            <span class="text-gray-600 ml-2">- 模型显示名称（默认：Dolphin 24B）</span>
                         </div>
                         <div class="bg-white rounded p-2">
                             <code class="text-blue-600 font-mono">DPHN_DEFAULT_TEMPLATE</code>
